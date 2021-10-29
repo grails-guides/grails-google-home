@@ -41,20 +41,19 @@ configurations {
 // end::configurations[]
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-logging"
-    compile "org.springframework.boot:spring-boot-autoconfigure"
-    compile "org.grails:grails-core"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-logging"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation "org.grails:grails-core"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
     // tag::springBootStarterJetty[]
-    provided "org.springframework.boot:spring-boot-starter-jetty"
+    implementation "org.springframework.boot:spring-boot-starter-jetty"
     // end::springBootStarterJetty[]
-    compile "org.grails:grails-dependencies"
-    compile "org.grails:grails-web-boot"
-    compile "org.grails.plugins:cache"
-    compile "org.grails.plugins:scaffolding"
+    implementation "org.grails:grails-dependencies"
+    implementation "org.grails:grails-web-boot"
+    implementation "org.grails.plugins:cache"
+    implementation "org.grails.plugins:scaffolding"
     console "org.grails:grails-console"
     profile "org.grails.profiles:web"
-    testCompile "org.grails:grails-plugin-testing"    
 
     // tag::cloudStorageDependency[]
     compile 'com.google.cloud:google-cloud-storage:0.12.0-beta'
@@ -67,9 +66,13 @@ dependencies {
 
 
 bootRun {
-    jvmArgs('-Dspring.output.ansi.enabled=always')
-    addResources = true
-    systemProperties System.properties    
+    ignoreExitValue true
+    jvmArgs(
+            '-Dspring.output.ansi.enabled=always',
+            '-noverify',
+            '-XX:TieredStopAtLevel=1',
+            '-Xmx1024m')
+    sourceResources sourceSets.main
 }
 
 codenarc {
@@ -77,3 +80,4 @@ codenarc {
     configFile = new File(projectDir, 'config/codenarc/rules.groovy')
     reportFormat = 'html'
 }
+tasks.withType(Test) { useJUnitPlatform() }
