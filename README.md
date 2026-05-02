@@ -1,5 +1,11 @@
-# grails-google-home
+# Google Home Guide
 
-[Google Home Guide](http://guides.grails.org/grails-google-home/guide/index.html)
+This repository contains the worked sample app for the [Google Home Guide](https://grails.apache.org/guides/grails-google-home/4/guide/index.html) guide on the Apache Grails site.
 
-[![Build Status](https://travis-ci.org/grails-guides/grails-google-cloud.svg?branch=master)](https://travis-ci.org/grails-guides/grails-google-cloud)
+## Run the example
+
+`./gradlew bootRun`
+
+## Maintained at apache/grails-static-website
+
+The guide narrative is maintained at https://github.com/apache/grails-static-website. Changes to the guide content go there; this repo holds the worked sample app only.
